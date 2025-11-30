@@ -7,6 +7,6 @@ import verifyFirebaseToken from '../middlewares/verifyFirebaseToken.js';
 
 const router = express.Router();
 
-router.use(verifyFirebaseToken, codeRoutes);
+router.use('/code', verifyFirebaseToken, codeRoutes);
 
 export default router;
