@@ -8,7 +8,7 @@ async function verifyFirebaseToken(req: Request, res: Response, next: NextFuncti
   const token = authorization.split(' ')[1];
 
   try {
-    const tokenData = admin.auth().verifyIdToken(token);
+    const tokenData = await admin.auth().verifyIdToken(token);
     res.locals.tokenData = tokenData;
     next();
   } catch (err) {

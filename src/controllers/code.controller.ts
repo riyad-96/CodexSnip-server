@@ -1,4 +1,14 @@
+// types
 import type { Request, Response } from 'express';
+
+async function getCode(req: Request, res: Response) {
+  try {
+    res.send('wait');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('server-error');
+  }
+}
 
 async function addNewCode(req: Request, res: Response) {
   try {
@@ -27,4 +37,4 @@ async function deleteCode(req: Request, res: Response) {
   }
 }
 
-export { addNewCode, updateCode, deleteCode };
+export { getCode, addNewCode, updateCode, deleteCode };

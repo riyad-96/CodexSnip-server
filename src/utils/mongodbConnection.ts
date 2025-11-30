@@ -20,6 +20,7 @@ function getDB() {
 function getCollection(name: string) {
   const coll = getDB().collection(name);
   if (!coll) throw new Error('Collection not found');
+  return coll;
 }
 
 export { connectToDB, getDB, getCollection };
