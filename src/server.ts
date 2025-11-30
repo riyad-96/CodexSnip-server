@@ -1,6 +1,6 @@
 // External imports
 import './loadEnv.js';
-import express from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 
 // Local imports
@@ -13,6 +13,10 @@ app.use(express.json());
 
 // App route
 app.use(indexRouter);
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('server is live')
+})
 
 // Initialize server
 const PORT = process.env.PORT;
