@@ -5,6 +5,7 @@ import cors from 'cors';
 
 // Local imports
 import indexRouter from './routes/indexRouter.js';
+import { connectToDB } from './utils/mongodbConnection.js';
 
 // Initialize app
 const app = express();
@@ -27,4 +28,5 @@ app.get('/', (req: Request, res: Response) => {
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log('server started');
+  connectToDB();
 });
