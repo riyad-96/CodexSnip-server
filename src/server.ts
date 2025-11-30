@@ -8,15 +8,20 @@ import indexRouter from './routes/indexRouter.js';
 
 // Initialize app
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.ALLOWED_ORIGIN,
+  }),
+);
 app.use(express.json());
 
 // App route
 app.use(indexRouter);
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('server is live')
-})
+  res.send('server is live');
+});
 
 // Initialize server
 const PORT = process.env.PORT;
