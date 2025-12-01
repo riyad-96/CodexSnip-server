@@ -18,11 +18,11 @@ app.use(
 app.use(express.json());
 
 // App route
-app.use(indexRouter);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('server is live');
 });
+app.use(indexRouter);
 
 // Initialize server
 const PORT = process.env.PORT;
