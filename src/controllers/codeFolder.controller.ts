@@ -1,18 +1,15 @@
 // types
 import type { Request, Response } from 'express';
 // Local imports
-import { getCollection } from '../utils/mongodbConnection.js';
+import { codeFoldersCollection } from '../utils/mongodbConnection.js';
 import { CodeFolder } from '../types/types.js';
-
-function getCodeFolderCollection() {
-  return getCollection('code_folders');
-}
+import { ObjectId } from 'mongodb';
 
 // add new code folder
 async function addNewCodeFolder(req: Request, res: Response) {
   const { email, uid } = res.locals.tokenData;
   try {
-    const newCodeFolder: CodeFolder = {
+    const newCodeFolder: Omit<CodeFolder, '_id'> = {
       uid,
       email,
       folder_name: '',
@@ -21,7 +18,7 @@ async function addNewCodeFolder(req: Request, res: Response) {
       created_at: new Date(),
       updated_at: new Date(),
     };
-    const coll = getCodeFolderCollection();
+    const coll = codeFoldersCollection();
     await coll.insertOne(newCodeFolder);
     res.send('folder-created');
   } catch (err) {
@@ -33,7 +30,7 @@ async function addNewCodeFolder(req: Request, res: Response) {
 async function getCodeFolders(req: Request, res: Response) {
   const { email, uid } = res.locals.tokenData;
   try {
-    const codeFolderCollection = getCollection('code_folders');
+    const codeFolderCollection = codeFoldersCollection();
     const folders = await codeFolderCollection.find({ email, uid }).toArray();
     res.send(folders);
   } catch (err) {
@@ -41,6 +38,21 @@ async function getCodeFolders(req: Request, res: Response) {
     res.status(500).send('server-error');
   }
 }
+
+async function getSingleCodeFolder(req: Request, res: Response) {
+  try {
+    const { email } = res.locals.tokenData;
+    const id = req.params.id;
+    const coll = codeFoldersCollection();
+    const folder = await coll.findOne({ _id: new ObjectId(id), email });
+    if (!folder) return res.status(404).send('folder-not-found');
+    res.send(folder);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('server-error');
+  }
+}
+
 async function updateCodeFolder(req: Request, res: Response) {
   try {
     console.log(req.body);
@@ -58,4 +70,10 @@ async function deleteCodeFolder(req: Request, res: Response) {
   }
 }
 
-export { addNewCodeFolder, getCodeFolders, updateCodeFolder, deleteCodeFolder };
+export {
+  addNewCodeFolder,
+  getCodeFolders,
+  getSingleCodeFolder,
+  updateCodeFolder,
+  deleteCodeFolder,
+};

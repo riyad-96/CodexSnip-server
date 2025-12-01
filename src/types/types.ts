@@ -1,15 +1,16 @@
-import { ObjectId } from "mongodb";
+import { ObjectId } from 'mongodb';
 
 export type CodeBlock = {
-  _id?: string;
+  _id?: ObjectId | undefined;
   uid: string;
   email: string;
+  folder_id: string;
   title: string;
   description: string;
   code: string;
   language: string;
-  createdAt: number;
-  updatedAt: number;
+  created_at: number | string | Date;
+  updated_at: number | string | Date;
 };
 
 export type CodeFolder = {
@@ -18,9 +19,7 @@ export type CodeFolder = {
   email: string;
   folder_name: string;
   folder_description: string;
-  code_blocks: [];
-  created_at: number | Date;
-  updated_at: number | Date;
+  code_blocks: ObjectId[];
+  created_at: number | string | Date;
+  updated_at: number | string | Date;
 };
-
-export type ClientCodeFolderPostType = Omit<CodeFolder, '_id'| 'created_at' | 'updated_at'>;
