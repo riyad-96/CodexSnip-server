@@ -18,7 +18,6 @@ app.use(
 app.use(express.json());
 
 // App route
-
 app.get('/', (req: Request, res: Response) => {
   res.send('server is live');
 });
