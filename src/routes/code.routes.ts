@@ -10,10 +10,10 @@ import {
 
 const router = express.Router();
 
-router.get('/code/get', getCodes);
-router.get('/code/get/:id', getSingleCode);
-router.post('/code/add', addNewCode);
-router.patch('/code/update', updateCode);
-router.delete('/code/delete', deleteCode);
+router.post('/add', addNewCode);
+router.get('/get', getCodes);
+router.get('/get/:id', getSingleCode);
+router.patch('/update', updateCode);
+router.delete('/delete', deleteCode);
 
 export default router;

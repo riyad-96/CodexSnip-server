@@ -10,10 +10,10 @@ import {
 
 const router = express.Router();
 
-router.post('/codefolder/add', addNewCodeFolder);
-router.get('/codefolder/get', getCodeFolders);
-router.get('/codefolder/get/:id', getSingleCodeFolder)
-router.patch('/codefolder/update', updateCodeFolder);
-router.delete('/codefolder/delete', deleteCodeFolder);
+router.post('/add', addNewCodeFolder);
+router.get('/getall', getCodeFolders);
+router.get('/get/:id', getSingleCodeFolder)
+router.patch('/update', updateCodeFolder);
+router.delete('/delete', deleteCodeFolder);
 
 export default router;

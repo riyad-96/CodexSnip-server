@@ -8,7 +8,7 @@ import codeFolderRoutes from './codeFolder.routes.js';
 
 const router = express.Router();
 
-router.use(verifyFirebaseToken, codeFolderRoutes);
-router.use(verifyFirebaseToken, codeRoutes);
+router.use('/codefolder', verifyFirebaseToken, codeFolderRoutes);
+router.use('/code', verifyFirebaseToken, codeRoutes);
 
 export default router;
