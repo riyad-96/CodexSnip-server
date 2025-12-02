@@ -9,6 +9,7 @@ export type CodeBlock = {
   description: string;
   code: string;
   language: string;
+  theme: string;
   created_at: number | string | Date;
   updated_at: number | string | Date;
 };

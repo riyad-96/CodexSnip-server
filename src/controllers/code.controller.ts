@@ -44,6 +44,7 @@ async function addNewCode(req: Request, res: Response) {
       description: data.description ?? '',
       code: data.code ?? '',
       language: data.language ?? '',
+      theme: data.theme ?? '',
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     };
