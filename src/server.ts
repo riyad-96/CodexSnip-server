@@ -25,7 +25,9 @@ app.use(indexRouter);
 
 // Initialize server
 const PORT = process.env.PORT;
-app.listen(PORT, () => {
-  console.log('server started');
-  connectToDB();
+
+connectToDB(() => {
+  app.listen(PORT, () => {
+    console.log('server started');
+  });
 });
