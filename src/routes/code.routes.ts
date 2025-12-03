@@ -14,6 +14,6 @@ router.post('/add', addNewCode);
 router.get('/get', getCodes);
 router.get('/get/:id', getSingleCode);
 router.patch('/update', updateCode);
-router.delete('/delete', deleteCode);
+router.delete('/delete/:folder_id/:code_block_id', deleteCode);
 
 export default router;

@@ -24,3 +24,21 @@ export type CodeFolder = {
   created_at: number | string | Date;
   updated_at: number | string | Date;
 };
+
+export type EditorUpdateValuesType = {
+  title: string;
+  description: string;
+  code: string;
+  language: string;
+  theme: string;
+  code_block_id: string;
+  folder_id: string;
+  updated_at?: number | string | Date;
+};
+
+export type UpdateFolderDetailsType = {
+  folder_id: string;
+  folder_name: string;
+  folder_description: string;
+  updated_at: number | Date | string;
+};

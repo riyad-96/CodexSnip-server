@@ -2,7 +2,7 @@
 import type { Request, Response } from 'express';
 // Local imports
 import { codeFoldersCollection } from '../utils/mongodbConnection.js';
-import { CodeFolder } from '../types/types.js';
+import { CodeFolder, UpdateFolderDetailsType } from '../types/types.js';
 import { ObjectId } from 'mongodb';
 
 // add new code folder
@@ -55,7 +55,26 @@ async function getSingleCodeFolder(req: Request, res: Response) {
 
 async function updateCodeFolder(req: Request, res: Response) {
   try {
-    console.log(req.body);
+    const { email } = res.locals.tokenData;
+    const data: UpdateFolderDetailsType = req.body;
+
+    const folderColl = codeFoldersCollection();
+    const folder = await folderColl.findOne({ email, _id: new ObjectId(data.folder_id) });
+
+    if (!folder) return res.status(404).send('folder-not-found');
+
+    await folderColl.updateOne(
+      { email, _id: new ObjectId(data.folder_id) },
+      {
+        $set: {
+          folder_name: data.folder_name,
+          folder_description: data.folder_description,
+          updated_at: new Date().toISOString(),
+        },
+      },
+    );
+
+    res.send('folder-updated');
   } catch (err) {
     console.error(err);
     res.status(500).send('server-error');
