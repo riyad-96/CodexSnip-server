@@ -14,7 +14,7 @@ export async function updateCodeFolderUpdateTime(email: string, folder_id: strin
     { email, _id: new ObjectId(folder_id) },
     {
       $set: {
-        updated_at: new Date().toISOString(),
+        updated_at: new Date(),
       },
     },
   );
@@ -57,8 +57,8 @@ async function addNewCode(req: Request, res: Response) {
       code: data.code ?? '',
       language: data.language ?? '',
       theme: data.theme ?? '',
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
+      created_at: new Date(),
+      updated_at: new Date(),
     };
 
     const coll = codeBlocksCollection();
@@ -108,7 +108,7 @@ async function updateCode(req: Request, res: Response) {
           code: data.code,
           language: data.language,
           theme: data.theme,
-          updated_at: new Date().toISOString(),
+          updated_at: new Date(),
         },
       },
     );

@@ -42,3 +42,8 @@ export type UpdateFolderDetailsType = {
   folder_description: string;
   updated_at: number | Date | string;
 };
+
+export type NewFolderDataType = {
+  folder_name: string;
+  folder_description: string;
+};

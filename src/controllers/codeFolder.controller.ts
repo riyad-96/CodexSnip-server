@@ -2,18 +2,19 @@
 import type { Request, Response } from 'express';
 // Local imports
 import { codeBlocksCollection, codeFoldersCollection } from '../utils/mongodbConnection.js';
-import { CodeFolder, UpdateFolderDetailsType } from '../types/types.js';
+import { CodeFolder, NewFolderDataType, UpdateFolderDetailsType } from '../types/types.js';
 import { ObjectId } from 'mongodb';
 
 // add new code folder
 async function addNewCodeFolder(req: Request, res: Response) {
   const { email, uid } = res.locals.tokenData;
   try {
+    const data: NewFolderDataType = req.body;
     const newCodeFolder: Omit<CodeFolder, '_id'> = {
       uid,
       email,
-      folder_name: '',
-      folder_description: '',
+      folder_name: data.folder_name ?? '',
+      folder_description: data.folder_description ?? '',
       code_blocks: [],
       created_at: new Date(),
       updated_at: new Date(),
@@ -69,7 +70,7 @@ async function updateCodeFolder(req: Request, res: Response) {
         $set: {
           folder_name: data.folder_name,
           folder_description: data.folder_description,
-          updated_at: new Date().toISOString(),
+          updated_at: new Date(),
         },
       },
     );
