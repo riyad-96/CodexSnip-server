@@ -14,6 +14,6 @@ router.post('/add', addNewCodeFolder);
 router.get('/getall', getCodeFolders);
 router.get('/get/:id', getSingleCodeFolder)
 router.patch('/update', updateCodeFolder);
-router.delete('/delete', deleteCodeFolder);
+router.delete('/delete/:id', deleteCodeFolder);
 
 export default router;
