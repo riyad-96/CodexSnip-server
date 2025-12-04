@@ -8,10 +8,10 @@ type newCodeBlock = Omit<CodeBlock, '_id'>;
 import { codeBlocksCollection, codeFoldersCollection } from '../utils/mongodbConnection.js';
 import { ObjectId } from 'mongodb';
 
-export async function updateCodeFolderUpdateTime(email: string, folder_id: string) {
+export async function updateCodeFolderUpdateTime(email: string, folder_id: ObjectId) {
   const folderColl = codeFoldersCollection();
   await folderColl.updateOne(
-    { email, _id: new ObjectId(folder_id) },
+    { email, _id: folder_id },
     {
       $set: {
         updated_at: new Date(),
@@ -51,7 +51,7 @@ async function addNewCode(req: Request, res: Response) {
     const newCodeBlock: newCodeBlock = {
       uid,
       email,
-      folder_id: data.folder_id,
+      folder_id: new ObjectId(data.folder_id),
       title: data.title ?? '',
       description: data.description ?? '',
       code: data.code ?? '',
@@ -113,7 +113,7 @@ async function updateCode(req: Request, res: Response) {
       },
     );
 
-    await updateCodeFolderUpdateTime(email, data.folder_id);
+    await updateCodeFolderUpdateTime(email, new ObjectId(data.folder_id));
 
     res.send('codeblock-updated');
   } catch (err) {
@@ -146,7 +146,7 @@ async function deleteCode(req: Request, res: Response) {
       },
     );
 
-    await updateCodeFolderUpdateTime(email, folder_id);
+    await updateCodeFolderUpdateTime(email, new ObjectId(folder_id));
 
     res.send('codeblock-deleted');
   } catch (err) {

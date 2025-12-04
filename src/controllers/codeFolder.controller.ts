@@ -44,10 +44,25 @@ async function getSingleCodeFolder(req: Request, res: Response) {
   try {
     const { email } = res.locals.tokenData;
     const id = req.params.id;
-    const coll = codeFoldersCollection();
-    const folder = await coll.findOne({ _id: new ObjectId(id), email });
+    const folderColl = codeFoldersCollection();
+    const folder = await folderColl.findOne({ email, _id: new ObjectId(id) });
     if (!folder) return res.status(404).send('folder-not-found');
-    res.send(folder);
+
+    const [folderWithCodeBlocks] = await folderColl
+      .aggregate([
+        { $match: { _id: new ObjectId(id) } },
+        {
+          $lookup: {
+            from: 'code_blocks',
+            localField: 'code_blocks',
+            foreignField: '_id',
+            as: 'code_blocks',
+          },
+        },
+      ])
+      .toArray();
+
+    res.send(folderWithCodeBlocks);
   } catch (err) {
     console.error(err);
     res.status(500).send('server-error');
@@ -93,7 +108,7 @@ async function deleteCodeFolder(req: Request, res: Response) {
     const folder = await folderColl.findOne({ email, _id: new ObjectId(id) });
     if (!folder) return res.status(404).send('folder-not-found');
 
-    await codeColl.deleteMany({ email, folder_id: folder._id.toString() });
+    await codeColl.deleteMany({ email, folder_id: folder._id });
     await folderColl.deleteOne({ email, _id: new ObjectId(id) });
 
     res.send('folder-deleted');

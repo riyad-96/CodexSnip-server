@@ -4,7 +4,7 @@ export type CodeBlock = {
   _id?: ObjectId | undefined;
   uid: string;
   email: string;
-  folder_id: string;
+  folder_id: ObjectId;
   title: string;
   description: string;
   code: string;

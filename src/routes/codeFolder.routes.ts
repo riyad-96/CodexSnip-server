@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.post('/add', addNewCodeFolder);
 router.get('/getall', getCodeFolders);
-router.get('/get/:id', getSingleCodeFolder)
+router.get('/get/:id', getSingleCodeFolder);
 router.patch('/update', updateCodeFolder);
 router.delete('/delete/:id', deleteCodeFolder);
 
