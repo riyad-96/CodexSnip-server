@@ -1,6 +1,6 @@
-# ⚙️ KitzoCodes Backend API
+# ⚙️ CodexSnip Backend API
 
-This repository houses the server-side application (API) that powers the **KitzoCodes** web application. It handles user authentication, data persistence, and provides the necessary endpoints for managing folders and code snippets.
+This repository houses the server-side application (API) that powers the **CodexSnip** web application. It handles user authentication, data persistence, and provides the necessary endpoints for managing folders and code snippets.
 
 ## ✨ Core Functionality
 
