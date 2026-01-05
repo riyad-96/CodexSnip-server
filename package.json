@@ -10,20 +10,20 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
-    "express": "^5.1.0",
+    "express": "^5.2.1",
     "firebase-admin": "^13.6.0",
     "mongodb": "^7.0.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
+    "@eslint/js": "^9.39.2",
     "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.5",
-    "@types/node": "^24.10.1",
-    "eslint": "^9.39.1",
-    "globals": "^16.5.0",
-    "prettier": "^3.7.2",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.0.3",
+    "eslint": "^9.39.2",
+    "globals": "^17.0.0",
+    "prettier": "^3.7.4",
     "tsc-watch": "^7.2.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.48.0"
+    "typescript-eslint": "^8.51.0"
   }
 }
