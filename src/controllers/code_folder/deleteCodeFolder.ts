@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { codeBlocksCollection, codeFoldersCollection } from '../../utils/mongodbConnection.js';
 import { ObjectId } from 'mongodb';
 
-export default async function deleteCodeFolder(req: Request, res: Response) {
+export default async function deleteCodeFolder(req: Request<{ id: string }>, res: Response) {
   try {
     const id = req.params.id;
     const { email } = res.locals.tokenData;

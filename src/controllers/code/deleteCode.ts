@@ -3,7 +3,10 @@ import { codeBlocksCollection, codeFoldersCollection } from '../../utils/mongodb
 import { ObjectId } from 'mongodb';
 import updateCodeFolderUpdateTime from '../../utils/updateCodeFolderUpdateTime.js';
 
-export default async function deleteCode(req: Request, res: Response) {
+export default async function deleteCode(
+  req: Request<{ folder_id: string; code_block_id: string }>,
+  res: Response,
+) {
   try {
     const { email } = res.locals.tokenData;
     const { folder_id, code_block_id } = req.params;

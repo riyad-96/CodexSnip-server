@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { codeBlocksCollection } from '../../utils/mongodbConnection.js';
 import { ObjectId } from 'mongodb';
 
-export default async function getSingleCode(req: Request, res: Response) {
+export default async function getSingleCode(req: Request<{ id: string }>, res: Response) {
   try {
     const { email } = res.locals.tokenData;
     const codeBlockId = req.params.id;
